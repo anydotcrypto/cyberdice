@@ -11,4 +11,4 @@ export const INFURA_PROJECT_ID = "";
 export const NETWORK_NAME: string = "mainnet";
 export const USER_MNEMONIC = ""; // Fill in a 12-word seed. Easy to generate on MyCrypto or MetaMask.
 export const CYBERDICE_CONTRACT_ADDRESS =
-  "0xDD39cCF9Dc21FDF2A009edf5C3df70fa1da7ef56";
+  "0x2542f9c01b9a1Dfb26aB56Bc246E67058F4A0d10";

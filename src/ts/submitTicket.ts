@@ -30,7 +30,6 @@ import {
   CYBERDICE_CONTRACT_ADDRESS,
 } from "./config";
 import { parseEther } from "ethers/utils";
-import { EchoFactory } from "../typedContracts/EchoFactory";
 
 /**
  * Set up the provider and wallet
