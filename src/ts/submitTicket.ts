@@ -28,6 +28,7 @@ import {
   NETWORK_NAME,
   DEPOSIT_CONFIRMATIONS,
   CYBERDICE_CONTRACT_ADDRESS,
+  PRIVATE_KEY,
 } from "./config";
 import { parseEther } from "ethers/utils";
 
@@ -40,13 +41,30 @@ async function setup() {
     INFURA_PROJECT_ID
   );
 
-  const userMnemonicWallet = ethers.Wallet.fromMnemonic(USER_MNEMONIC);
-  const user = userMnemonicWallet.connect(infuraProvider);
+  if (USER_MNEMONIC.length > 0) {
+    const userMnemonicWallet = ethers.Wallet.fromMnemonic(USER_MNEMONIC);
+    const user = userMnemonicWallet.connect(infuraProvider);
 
-  return {
-    user,
-    provider: infuraProvider,
-  };
+    return {
+      user,
+      provider: infuraProvider,
+    };
+  }
+
+  if (PRIVATE_KEY.length > 0) {
+    const userMnemonicWallet = ethers.Wallet.fromMnemonic(USER_MNEMONIC);
+    const user = userMnemonicWallet.connect(infuraProvider);
+
+    return {
+      user,
+      provider: infuraProvider,
+    };
+  }
+
+  consolelog(
+    "No user credentials in config.ts. \nRun 'npm run generateSeed' to compute a new wallet for the competition."
+  );
+  process.exit(0);
 }
 
 /**
@@ -88,28 +106,33 @@ async function sendTicket(
    *
    * Anyway, back to the competition. Fill in the blanks!
    */
-  // const { relayTx, anySenderReceipt } = await sendToAnySender(//
+  const { relayTx, anySenderReceipt } = await sendToAnySender(
+    cyberDiceCon,
+    callData,
+    user,
+    provider
+  );
   // fill in the blanks
   // );
 
-  // /* *********************************************
-  //  * Do not forget to uncomment the code below!
-  //  *********************************************** */
+  /* *********************************************
+   * Do not forget to uncomment the code below!
+   *********************************************** */
 
-  // consolelog(anySenderReceipt);
+  consolelog(anySenderReceipt);
 
-  // /**
-  //  * We simply watch for an event in the any.sender relay contract to verify
-  //  * when the relay transaction gets mined.
-  //  */
-  // const totalWait = await watchRelayTx(relayTx, user, provider);
+  /**
+   * We simply watch for an event in the any.sender relay contract to verify
+   * when the relay transaction gets mined.
+   */
+  const totalWait = await watchRelayTx(relayTx, user, provider);
 
-  // consolelog("Relay transaction confirmed after " + totalWait + " blocks");
-  // const totalUserTickets = await cyberDiceCon.userTickets(user.address);
+  consolelog("Relay transaction confirmed after " + totalWait + " blocks");
+  const totalUserTickets = await cyberDiceCon.userTickets(user.address);
 
-  // // Print results on-screen
-  // consolelog("Tickets for " + user.address + ": " + totalUserTickets);
-  // consolelog("All tickets: " + (await cyberDiceCon.totalTickets()));
+  // Print results on-screen
+  consolelog("Tickets for " + user.address + ": " + totalUserTickets);
+  consolelog("All tickets: " + (await cyberDiceCon.totalTickets()));
 }
 
 /**
@@ -124,14 +147,10 @@ async function sendTicket(
   // ricmoo this is ur fault
   console.log = () => {};
 
-  // Sanity check the config.ts is filled in.
-  if (USER_MNEMONIC.length === 0 || INFURA_PROJECT_ID.length === 0) {
-    consolelog(
-      "Please open config.ts and fill in USER_MNEMONIC / INFURA_PROJECT_ID"
-    );
+  if (INFURA_PROJECT_ID.length === 0) {
+    consolelog("Please open config.ts and fill in INFURA_PROJECT_ID");
     return;
   }
-
   // Set up wallets & provider
   const { user, provider } = await setup();
 

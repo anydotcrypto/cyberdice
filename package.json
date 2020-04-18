@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "submitTicket": "ts-node src/ts/submitTicket.ts"
+    "submitTicket": "ts-node src/ts/submitTicket.ts",
+    "generateSeed": "ts-node src/ts/generateSeed.ts"
   },
   "devDependencies": {},
   "dependencies": {
