@@ -52,7 +52,7 @@ async function setup() {
   }
 
   if (PRIVATE_KEY.length > 0) {
-    const userMnemonicWallet = ethers.Wallet.fromMnemonic(USER_MNEMONIC);
+    const userMnemonicWallet = new Wallet(PRIVATE_KEY);
     const user = userMnemonicWallet.connect(infuraProvider);
 
     return {
