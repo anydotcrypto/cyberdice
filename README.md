@@ -110,7 +110,6 @@ npm run submitTicket
 *** You are running the any.sender competition script on mainnet ***
 Your wallet address: 0xDAE7c65D3d5D86A8963a0D56677Cdd1d11334454
 Your balance is 0. Please top it up to 0.03 eth or more.
-
 ```
 Please make sure that whatever option you use to import a wallet - that the address has a balance of at least ~0.03 eth. 
 
