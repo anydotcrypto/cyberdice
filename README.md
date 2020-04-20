@@ -1,12 +1,14 @@
 # CyberDice Competition
 
-We have put together a fun and provably fair competition to demonstrate the power of [any.sender - a non-custodial and skin-in-the-game relay as a service API.](https://github.com/PISAresearch/docs.any.sender) 
+We have put together a fun and provably fair competition to demonstrate the power of [any.sender - a non-custodial and skin-in-the-game relay as a service API](https://github.com/PISAresearch/docs.any.sender).
 
 To enter the competition: 
 - You must solve a small technical challenge in this code repository.
 - Deposit ~$3 to pay the network gas fee. 
 
 By solving the challenge and running the script, it will authorise a ticket entry to the competition which is sent via any.sender and you will have a chance to win ~5 eth (more details on the game mechanics below). 
+
+If you get stuck at all during the competition, then come join us in our [Telegram Group](https://t.me/anydotsender).
 
 ## CyberDice 1.0 (2008)
 
@@ -161,6 +163,6 @@ Check out the competition contracts:
 - [CyberDice.sol](https://etherscan.io/address/0x2542f9c01b9a1Dfb26aB56Bc246E67058F4A0d10)
 - [CommunityBeacon.sol](https://etherscan.io/address/0xaa0017e80099029013de2509db47f7bc9a7331d9)
 
-We have included a twist in CyberDice, s ocheck out the getNoTickets() function. You'll notice  that more tickets are minted during certain periods of the day. Why not take advantage of that to earn more tickets? 
+We have included a twist in CyberDice, so check out the getNoTickets() function. You'll notice  that more tickets are minted during certain periods of the day. Why not take advantage of that to earn more tickets? 
 
 You can also check out the [metatransaction repo](https://github.com/anydotcrypto/relayhub) to better understand how the replay protection (multinonce) works under the hood. For the competition, we have used the RelayHub and the \_msgSender() standard. Together, it can detach who has paid the transaction fee (gas.payer) and who authorised the command (msg.sender). 
