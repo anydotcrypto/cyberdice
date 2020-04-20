@@ -1,6 +1,6 @@
 # CyberDice Competition
 
-We have put together a fun and provably fair competition to demonstrate the power of any.sender - a non-custodial and skin-in-the-game relay as a service API. 
+We have put together a fun and provably fair competition to demonstrate the power of [any.sender - a non-custodial and skin-in-the-game relay as a service API.](https://github.com/PISAresearch/docs.any.sender) 
 
 To enter the competition: 
 - You must solve a small technical challenge in this code repository.
@@ -32,7 +32,7 @@ To us, what makes Ethereum special is that we can take this idea that was mostly
 
 ## CyberDice 2.0 (Smart contract edition)
 
-This brings to the smart contract edition, CyberDice.sol, which is responsible for: 
+This brings to the smart contract edition, [CyberDice.sol](https://etherscan.io/address/0x2542f9c01b9a1Dfb26aB56Bc246E67058F4A0d10), which is responsible for: 
 - Custody of the prize deposit, 
 - Enforcing the protocol (accepting tickets, enforcing game deadlines, computing winner)
 - Sending the winner their prize. 
@@ -51,7 +51,7 @@ This competition is to demonstrate the power and ease-of-use of any.sender - our
 
 We have included a **_technical challenge for developers_** that requires some technical skill to complete the script. Once finished, the script sends any.sender the pre-approved ticket entry (meta-transaction) and in turn any.sender will quickly deliver it to the blockchain. 
 
-So in a way, our competition is not simply a "lottery", but in fact it requires some technical skill and coding to submit a ticket! 
+So in a way, our competition is not simply a "lottery", but it requires some technical skill and coding to submit a ticket! 
 
 Our technical challenge has three files:
 
@@ -89,20 +89,29 @@ The configuration file has some default values like the anysender API, receipt s
 export const INFURA_PROJECT_ID = "a3b26b2802f44d9caec977a00c08c01b2c"; // dummy value 
 export const USER_MNEMONIC =
   "anysender non custodial relay as a service no more sunk cost yay";
+export const PRIVATE_KEY = "182318...";
 ```
 
-There are plenty of ways to generate a 12-word seed such as MetaMask, MyCrypto, etc.
+You need to visit [Infura](https://infura.io/) to obtain a project ID. It is free and quick to register.
 
-If you run the program now it will present your current wallet address and recommend you to top up 0.03 eth (~$3). 
+For importing the wallet credentials, you can use a 12-word seed (USER_MNEMONIC) or a private key (PRIVATE_KEY). Both can be easily exported from wallets such as MetaMask, MyCrypto, etc. 
+
+As well, you can simply just run this script to generate a new wallet: 
+
+```
+npm run generateSeed
+```
+
+To confirm everything is set up just run: 
 
 ```
 npm run submitTicket 
 
-*** You are running the any.sender competition script on ropsten ***
+*** You are running the any.sender competition script on mainnet ***
 Your wallet address: 0xDAE7c65D3d5D86A8963a0D56677Cdd1d11334454
 Your balance is 0. Please top it up to 0.03 eth or more.
-
 ```
+Please make sure that whatever option you use to import a wallet - that the address has a balance of at least ~0.03 eth. 
 
 ### THE CHALLENGE - Fill in the blanks 
 
@@ -144,10 +153,14 @@ Tickets for 0xDAE7c65D3d5D86A8963a0D56677Cdd1d11334454: 3
 All tickets: 15
 ```
 
-### What to do next?
-
 You've submitted one ticket. yay!
 
-Have a look at the competition contract and check out the getNoTickets() function in the competition contract. You'll notice  that more tickets are minted during certain periods of the day. Why not take advantage of that to earn more tickets? 
+### What to do next?
+
+Check out the competition contracts:
+- [CyberDice.sol](https://etherscan.io/address/0x2542f9c01b9a1Dfb26aB56Bc246E67058F4A0d10)
+- [CommunityBeacon.sol](https://etherscan.io/address/0xaa0017e80099029013de2509db47f7bc9a7331d9)
+
+We have included a twist in CyberDice, s ocheck out the getNoTickets() function. You'll notice  that more tickets are minted during certain periods of the day. Why not take advantage of that to earn more tickets? 
 
 You can also check out the [metatransaction repo](https://github.com/anydotcrypto/relayhub) to better understand how the replay protection (multinonce) works under the hood. For the competition, we have used the RelayHub and the \_msgSender() standard. Together, it can detach who has paid the transaction fee (gas.payer) and who authorised the command (msg.sender). 
