@@ -111,7 +111,7 @@ async function sendTicket(
    *
    * Anyway, back to the competition. Fill in the blanks!
    */
-  const { relayTx, anySenderReceipt } = await sendToAnySender(
+  // const { relayTx, anySenderReceipt } = await sendToAnySender(
   // fill in the blanks
   // );
 
