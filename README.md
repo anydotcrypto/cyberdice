@@ -117,7 +117,7 @@ Please make sure that whatever option you use to import a wallet - that the addr
 
 Now that everything is configured (and you have topped up the wallet address), it is time to get standard with the challenge. 
 
-In submitTicket.ts, you will need to fill in the blanks for [sendToAnySender()](https://github.com/stonecoldpat/competition-public/blob/master/src/ts/submitTicket.ts#L92). 
+In submitTicket.ts, you will need to fill in the blanks for [sendToAnySender()](https://github.com/anydotcrypto/cyberdice/blob/master/src/ts/submitTicket.ts#L114). 
 
 ```
 sendToAnySender(target: Contract, callData: string, user: Wallet, provider: Provider)
