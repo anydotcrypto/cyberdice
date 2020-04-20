@@ -19,7 +19,6 @@ import {
   watchRelayTx,
   onchainDepositFor,
   getAnySenderBalance,
-  consolelog,
 } from "./utils";
 import { CyberDiceFactory } from "../typedContracts/CyberDiceFactory";
 import {
@@ -41,6 +40,12 @@ async function setup() {
     INFURA_PROJECT_ID
   );
 
+  if (USER_MNEMONIC.length > 0 && PRIVATE_KEY.length > 0) {
+    console.log(
+      "Both 12-worrd seed and private key is filled in. Please only use one option!"
+    );
+  }
+
   if (USER_MNEMONIC.length > 0) {
     const userMnemonicWallet = ethers.Wallet.fromMnemonic(USER_MNEMONIC);
     const user = userMnemonicWallet.connect(infuraProvider);
@@ -61,7 +66,7 @@ async function setup() {
     };
   }
 
-  consolelog(
+  console.log(
     "No user credentials in config.ts. \nRun 'npm run generateSeed' to compute a new wallet for the competition."
   );
   process.exit(0);
@@ -107,11 +112,6 @@ async function sendTicket(
    * Anyway, back to the competition. Fill in the blanks!
    */
   const { relayTx, anySenderReceipt } = await sendToAnySender(
-    cyberDiceCon,
-    callData,
-    user,
-    provider
-  );
   // fill in the blanks
   // );
 
@@ -119,20 +119,19 @@ async function sendTicket(
    * Do not forget to uncomment the code below!
    *********************************************** */
 
-  consolelog(anySenderReceipt);
+  // console.log(anySenderReceipt);
 
-  /**
-   * We simply watch for an event in the any.sender relay contract to verify
-   * when the relay transaction gets mined.
-   */
-  const totalWait = await watchRelayTx(relayTx, user, provider);
+  // /**
+  //  * We simply watch for an event in the any.sender relay contract to verify
+  //  * when the relay transaction gets mined.
+  //  */
+  // const totalWait = await watchRelayTx(relayTx, user, provider);
 
-  consolelog("Relay transaction confirmed after " + totalWait + " blocks");
-  const totalUserTickets = await cyberDiceCon.userTickets(user.address);
+  // console.log("Relay transaction confirmed after " + totalWait + " blocks");
+  // const totalUserTickets = await cyberDiceCon.userTickets(user.address);
 
-  // Print results on-screen
-  consolelog("Tickets for " + user.address + ": " + totalUserTickets);
-  consolelog("All tickets: " + (await cyberDiceCon.totalTickets()));
+  // // Print results on-screen
+  // console.log("Tickets for " + user.address + ": " + totalUserTickets);
 }
 
 /**
@@ -145,10 +144,14 @@ async function sendTicket(
  */
 (async () => {
   // ricmoo this is ur fault
-  console.log = () => {};
+  var log = console.log;
+  console.log = (messages: string) => {
+    if (messages === "WARNING: unsupported ABI type - receive") return;
+    else log(messages);
+  };
 
   if (INFURA_PROJECT_ID.length === 0) {
-    consolelog("Please open config.ts and fill in INFURA_PROJECT_ID");
+    console.log("Please open config.ts and fill in INFURA_PROJECT_ID");
     return;
   }
   // Set up wallets & provider
@@ -159,13 +162,13 @@ async function sendTicket(
     CYBERDICE_CONTRACT_ADDRESS
   );
 
-  consolelog(
+  console.log(
     "*** You are running the any.sender competition script on " +
       NETWORK_NAME +
       " ***"
   );
 
-  consolelog("Your wallet address: " + user.address);
+  console.log("Your wallet address: " + user.address);
 
   // Sanity check minimum balance.
   let balance = await getAnySenderBalance(user);
@@ -176,26 +179,32 @@ async function sendTicket(
     if (bal.gt(parseEther("0.03"))) {
       // We need to wait for on-chain confirmations before any.sender
       // accepts the deposit.
-      consolelog(
+      console.log(
         "Sending on-chain deposit - wait ~" +
           DEPOSIT_CONFIRMATIONS +
           " confirmations"
       );
       await onchainDepositFor(parseEther("0.029"), user);
     } else {
-      consolelog("Your ethereum wallet lacks the funds to top up any.sender.");
-      consolelog("Your ethereum balance is " + bal.toString() + " wei");
-      consolelog("Please top up to at least 0.03 eth");
+      console.log("Your ethereum wallet lacks the funds to top up any.sender.");
+      console.log("Your ethereum balance is " + bal.toString() + " wei");
+      console.log("Please top up to at least 0.03 eth");
     }
   }
 
   // What is the user's any.sender balance?
   balance = await getAnySenderBalance(user);
-  consolelog("Balance on any.sender: " + balance.toString() + " wei");
+  console.log("Balance on any.sender: " + balance.toString() + " wei");
 
   const deadline = await cyberDiceCon.deadline();
+
+  // Confirm the competition has not finished.
+  if (Date.now() / 1000 > deadline.toNumber()) {
+    console.log("Competition has finished!");
+    return;
+  }
   const time = new Date(deadline.mul(1000).toNumber());
-  consolelog("Competition deadline: " + time.toLocaleString());
+  console.log("Competition deadline: " + time.toLocaleString());
 
   // Send ticket to any.sender
   await sendTicket(
@@ -205,6 +214,6 @@ async function sendTicket(
     cyberDiceCon
   );
 })().catch((e) => {
-  consolelog(e);
+  console.log(e);
   // Deal with the fact the chain failed
 });

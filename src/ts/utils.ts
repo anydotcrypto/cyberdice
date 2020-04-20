@@ -14,11 +14,6 @@ import {
 } from "./config";
 import { HubReplayProtection } from "@anydotcrypto/metatransactions/dist";
 
-// etherjs keeps printing "WARNING: unsupported ABI type - receive"
-// and it is a melt. so dedicating a new console.log
-// to avoid it printing. ricmoo if u read this, plz fix it!!
-export const consolelog = console.log;
-
 /**
  * Deposit coins into any.sender contract.
  * @param toDeposit Denominated in wei
@@ -44,9 +39,9 @@ export async function onchainDepositFor(toDeposit: BigNumber, wallet: Wallet) {
  */
 function etherscanLink(txhash: string) {
   if (NETWORK_NAME !== "mainnet") {
-    consolelog("https://" + NETWORK_NAME + ".etherscan.io/tx/" + txhash);
+    console.log("https://" + NETWORK_NAME + ".etherscan.io/tx/" + txhash);
   } else {
-    consolelog("https://etherscan.io/tx/" + txhash);
+    console.log("https://etherscan.io/tx/" + txhash);
   }
 }
 export async function getAnySenderBalance(wallet: Wallet) {
@@ -96,7 +91,7 @@ export async function sendToAnySender(
     params
   );
 
-  consolelog(
+  console.log(
     "Address of relayhub: " +
       HubReplayProtection.getHubAddress(NETWORK_NAME + "-relay")
   );
@@ -183,10 +178,10 @@ export async function watchRelayTx(
     const relay = new RelayFactory(wallet).attach(ANYSENDER_RELAY_CONTRACT);
     const relayTxId = AnySenderClient.relayTxId(relayTx);
 
-    consolelog("Checking for relayed transaction...");
+    console.log("Checking for relayed transaction...");
     while (!found) {
       await wait(5000); // Try again every 5 seconds.
-      consolelog("...");
+      console.log("...");
       await provider.getLogs(filter).then((result) => {
         const length = lookupLog(relayTxId, blockNo, result, relay);
 
