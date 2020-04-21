@@ -151,8 +151,7 @@ Checking for relayed transaction...
 ...
 https://ropsten.etherscan.io/tx/0xb8a6c017864e33f505e801173252a43a3a8d44fadd9c34e620bd1b41bffb6e2a
 Relay transaction confirmed after 4 blocks
-Tickets for 0xDAE7c65D3d5D86A8963a0D56677Cdd1d11334454: 3
-All tickets: 15
+Tickets for 0xDAE7c65D3d5D86A8963a0D56677Cdd1d11334454: 1
 ```
 
 You've submitted one ticket. yay!
@@ -160,9 +159,9 @@ You've submitted one ticket. yay!
 ### What to do next?
 
 Check out the competition contracts:
-- [CyberDice.sol](https://etherscan.io/address/0x2542f9c01b9a1Dfb26aB56Bc246E67058F4A0d10)
-- [CommunityBeacon.sol](https://etherscan.io/address/0xaa0017e80099029013de2509db47f7bc9a7331d9)
+- [CyberDice.sol](https://etherscan.io/address/0x3521f13ff6c0315d7c749081e848ff4a89667ae7)
+- [CommunityBeacon.sol](https://etherscan.io/address/0x277aee1ecba0034d24b9dfac5c866ff696fec087)
 
-We have included a twist in CyberDice, so check out the getNoTickets() function. You'll notice  that more tickets are minted during certain periods of the day. Why not take advantage of that to earn more tickets? 
+We have included a twist in CyberDice, so check out the getNoTickets() function. You'll notice that more tickets are minted during certain periods of the day. Why not take advantage of that to earn more tickets? 
 
 You can also check out the [metatransaction repo](https://github.com/anydotcrypto/relayhub) to better understand how the replay protection (multinonce) works under the hood. For the competition, we have used the RelayHub and the \_msgSender() standard. Together, it can detach who has paid the transaction fee (gas.payer) and who authorised the command (msg.sender). 
