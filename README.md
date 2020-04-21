@@ -58,7 +58,7 @@ So in a way, our competition is not simply a "lottery", but it requires some tec
 Our technical challenge has three files:
 
 - **config.ts** - Default values for the competition contract, user's 12-word seed, Infura ID, etc. 
-- **submitTicket.ts** - Deposits 0.02 eth into any.sender before sending a single ticket entry.  
+- **submitTicket.ts** - Deposits 0.01 eth into any.sender before sending a single ticket entry.  
 - **utils.ts** - Handles crafting the meta-transaction and sending it up to any.sender. 
 
 To submit a ticket, you will need to: 
