@@ -111,9 +111,12 @@ async function sendTicket(
    *
    * Anyway, back to the competition. Fill in the blanks!
    */
-  // const { relayTx, anySenderReceipt } = await sendToAnySender(
-  // fill in the blanks
-  // );
+  const { relayTx, anySenderReceipt } = await sendToAnySender(
+    cyberDiceCon,
+    callData,
+    user,
+    provider
+  );
 
   /* *********************************************
    * Do not forget to uncomment the code below!
@@ -171,12 +174,12 @@ async function sendTicket(
   console.log("Your wallet address: " + user.address);
 
   // Sanity check minimum balance.
-  let balance = await getAnySenderBalance(user);
-  const bal = await provider.getBalance(user.address);
+  let anySenderBalance = await getAnySenderBalance(user);
+  const ethereumBalance = await provider.getBalance(user.address);
 
   // Checks on-chain balance and any.sender balance
-  if (balance.lt(parseEther("0.01"))) {
-    if (bal.gt(parseEther("0.01"))) {
+  if (anySenderBalance.lt(parseEther("0.009"))) {
+    if (ethereumBalance.gte(parseEther("0.01"))) {
       // We need to wait for on-chain confirmations before any.sender
       // accepts the deposit.
       console.log(
@@ -187,14 +190,17 @@ async function sendTicket(
       await onchainDepositFor(parseEther("0.009"), user);
     } else {
       console.log("Your ethereum wallet lacks the funds to top up any.sender.");
-      console.log("Your ethereum balance is " + bal.toString() + " wei");
+      console.log(
+        "Your ethereum balance is " + anySenderBalance.toString() + " wei"
+      );
       console.log("Please top up to at least 0.01 eth");
+      return;
     }
   }
 
   // What is the user's any.sender balance?
-  balance = await getAnySenderBalance(user);
-  console.log("Balance on any.sender: " + balance.toString() + " wei");
+  anySenderBalance = await getAnySenderBalance(user);
+  console.log("Balance on any.sender: " + anySenderBalance.toString() + " wei");
 
   const deadline = await cyberDiceCon.deadline();
 
@@ -207,12 +213,12 @@ async function sendTicket(
   console.log("Competition deadline: " + time.toLocaleString());
 
   // Send ticket to any.sender
-  await sendTicket(
-    "any.sender API is super-easy to use",
-    user,
-    provider,
-    cyberDiceCon
-  );
+  // await sendTicket(
+  //   "any.sender API is super-easy to use",
+  //   user,
+  //   provider,
+  //   cyberDiceCon
+  // );
 })().catch((e) => {
   console.log(e);
   // Deal with the fact the chain failed
