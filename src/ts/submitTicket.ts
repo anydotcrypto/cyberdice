@@ -182,7 +182,7 @@ async function sendTicket(
       console.log(
         "Sending on-chain deposit - wait ~" +
           DEPOSIT_CONFIRMATIONS +
-          " confirmations"
+          " confirmations. (Click link to check confirmations so far)"
       );
       await onchainDepositFor(parseEther("0.009"), user);
     } else {
