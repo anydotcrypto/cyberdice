@@ -111,12 +111,9 @@ async function sendTicket(
    *
    * Anyway, back to the competition. Fill in the blanks!
    */
-  const { relayTx, anySenderReceipt } = await sendToAnySender(
-    cyberDiceCon,
-    callData,
-    user,
-    provider
-  );
+  // const { relayTx, anySenderReceipt } = await sendToAnySender(
+  //   // fill in the blanks
+  // );
 
   /* *********************************************
    * Do not forget to uncomment the code below!
@@ -212,7 +209,7 @@ async function sendTicket(
   const time = new Date(deadline.mul(1000).toNumber());
   console.log("Competition deadline: " + time.toLocaleString());
 
-  Send ticket to any.sender
+  // Send ticket to any.sender
   await sendTicket(
     "any.sender API is super-easy to use",
     user,
