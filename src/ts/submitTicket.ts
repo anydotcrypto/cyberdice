@@ -42,8 +42,9 @@ async function setup() {
 
   if (USER_MNEMONIC.length > 0 && PRIVATE_KEY.length > 0) {
     console.log(
-      "Both 12-worrd seed and private key is filled in. Please only use one option!"
+      "Both 12-word seed and private key is filled in. Please only use one option!"
     );
+    process.exit(0); // thanks to Sascha for pointing this out.
   }
 
   if (USER_MNEMONIC.length > 0) {
