@@ -4,11 +4,11 @@ We have put together a fun and provably fair competition to demonstrate the powe
 
 To enter the competition: 
 - You must solve a small technical challenge in this code repository.
-- Deposit ~$3 to pay the network gas fee. 
+- Deposit ~$1 to pay the network gas fee. 
 
-By solving the challenge and running the script, it will authorise a ticket entry to the competition which is sent via any.sender and you will have a chance to win ~5 eth (more details on the game mechanics below). 
+By solving the challenge and running the script, it will authorise a ticket entry to the competition which is sent via any.sender and you will have a chance to win 3 eth (more details on the game mechanics below). 
 
-If you get stuck at all during the competition, then come join us in our [Telegram Group](https://t.me/anydotsender).
+If you get stuck at all during the competition, then come join us in [Telegram](https://t.me/anydotsender).
 
 ## CyberDice 1.0 (2008)
 
@@ -58,7 +58,7 @@ So in a way, our competition is not simply a "lottery", but it requires some tec
 Our technical challenge has three files:
 
 - **config.ts** - Default values for the competition contract, user's 12-word seed, Infura ID, etc. 
-- **submitTicket.ts** - Deposits 0.05 eth into any.sender before sending a single ticket entry.  
+- **submitTicket.ts** - Deposits 0.02 eth into any.sender before sending a single ticket entry.  
 - **utils.ts** - Handles crafting the meta-transaction and sending it up to any.sender. 
 
 To submit a ticket, you will need to: 
@@ -111,9 +111,9 @@ npm run submitTicket
 
 *** You are running the any.sender competition script on mainnet ***
 Your wallet address: 0xDAE7c65D3d5D86A8963a0D56677Cdd1d11334454
-Your balance is 0. Please top it up to 0.03 eth or more.
+Your balance is 0. Please top it up to 0.01 eth or more.
 ```
-Please make sure that whatever option you use to import a wallet - that the address has a balance of at least ~0.03 eth. 
+Please make sure that whatever option you use to import a wallet - that the address has a balance of at least ~0.01 eth. 
 
 ### THE CHALLENGE - Fill in the blanks 
 
