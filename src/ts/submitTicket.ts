@@ -212,13 +212,13 @@ async function sendTicket(
   const time = new Date(deadline.mul(1000).toNumber());
   console.log("Competition deadline: " + time.toLocaleString());
 
-  // Send ticket to any.sender
-  // await sendTicket(
-  //   "any.sender API is super-easy to use",
-  //   user,
-  //   provider,
-  //   cyberDiceCon
-  // );
+  Send ticket to any.sender
+  await sendTicket(
+    "any.sender API is super-easy to use",
+    user,
+    provider,
+    cyberDiceCon
+  );
 })().catch((e) => {
   console.log(e);
   // Deal with the fact the chain failed
