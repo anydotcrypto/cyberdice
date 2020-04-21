@@ -14,6 +14,9 @@ import {
 } from "./config";
 import { HubReplayProtection } from "@anydotcrypto/metatransactions/dist";
 
+// Prepare the meta-transaction
+let hubReplayProtection: HubReplayProtection;
+
 /**
  * Deposit coins into any.sender contract.
  * @param toDeposit Denominated in wei
@@ -75,11 +78,13 @@ export async function sendToAnySender(
   provider: Provider
 ) {
   // Prepare the meta-transaction
-  const hubReplayProtection = HubReplayProtection.multinoncePreset(
-    user,
-    NETWORK_NAME + "-relay",
-    1
-  );
+  if (!hubReplayProtection) {
+    hubReplayProtection = HubReplayProtection.multinoncePreset(
+      user,
+      NETWORK_NAME + "-relay",
+      100
+    );
+  }
   const params = await hubReplayProtection.signMetaTransaction(
     user,
     target.address,
@@ -91,10 +96,6 @@ export async function sendToAnySender(
     params
   );
 
-  console.log(
-    "Address of relayhub: " +
-      HubReplayProtection.getHubAddress(NETWORK_NAME + "-relay")
-  );
   // Wrap it for any.sender
   const relayTx = await signedRelayTx(
     user,
