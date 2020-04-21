@@ -127,7 +127,7 @@ sendToAnySender(target: Contract, callData: string, user: Wallet, provider: Prov
 
 It requires 4 arguments which includes the competition contract, the calldata, the user's wallet and the infura provider. We don't want to give any more clues, but it is pretty straightforward if you look at the surrounding code :) 
 
-Once you have finished... don't forget to [update the message](https://github.com/anydotcrypto/cyberdice/blob/master/src/ts/submitTicket.ts#L215)that will posted to the [bullet board](https://www.anydot.dev/competition/) to something fun before running the code: 
+Once you have finished... don't forget to [update the message](https://github.com/anydotcrypto/cyberdice/blob/master/src/ts/submitTicket.ts#L215) that will posted to the [bullet board](https://www.anydot.dev/competition/) to something fun before running the code: 
 
 
 ``` 
