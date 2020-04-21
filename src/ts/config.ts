@@ -10,6 +10,6 @@ export const DEPOSIT_CONFIRMATIONS = 40; // Must wait this long before any.sende
 export const INFURA_PROJECT_ID = "";
 export const NETWORK_NAME: string = "mainnet";
 export const CYBERDICE_CONTRACT_ADDRESS =
-  "0x2542f9c01b9a1Dfb26aB56Bc246E67058F4A0d10";
-export const USER_MNEMONIC = ""; // Filled in by our competition script.
-export const PRIVATE_KEY = ""; // Option to import an privafte key
+  "0x3521f13ff6c0315d7c749081e848ff4a89667ae7";
+export const USER_MNEMONIC = ""; // Fill in a 12-word seed. Easy to generate on MyCrypto or MetaMask.
+export const PRIVATE_KEY = ""; // Option to import an private key

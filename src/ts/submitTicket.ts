@@ -175,8 +175,8 @@ async function sendTicket(
   const bal = await provider.getBalance(user.address);
 
   // Checks on-chain balance and any.sender balance
-  if (balance.lt(parseEther("0.025"))) {
-    if (bal.gt(parseEther("0.03"))) {
+  if (balance.lt(parseEther("0.01"))) {
+    if (bal.gt(parseEther("0.01"))) {
       // We need to wait for on-chain confirmations before any.sender
       // accepts the deposit.
       console.log(
@@ -184,11 +184,11 @@ async function sendTicket(
           DEPOSIT_CONFIRMATIONS +
           " confirmations"
       );
-      await onchainDepositFor(parseEther("0.029"), user);
+      await onchainDepositFor(parseEther("0.009"), user);
     } else {
       console.log("Your ethereum wallet lacks the funds to top up any.sender.");
       console.log("Your ethereum balance is " + bal.toString() + " wei");
-      console.log("Please top up to at least 0.03 eth");
+      console.log("Please top up to at least 0.01 eth");
     }
   }
 

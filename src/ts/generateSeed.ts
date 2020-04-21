@@ -1,5 +1,4 @@
 import { Wallet } from "ethers";
-import { consolelog } from "./utils";
 import * as fs from "fs";
 
 /**
@@ -38,6 +37,6 @@ import * as fs from "fs";
     );
   }
 })().catch((e) => {
-  consolelog(e);
+  console.log(e);
   // Deal with the fact the chain failed
 });
