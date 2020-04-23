@@ -96,13 +96,13 @@ export const PRIVATE_KEY = "182318...";
 
 You need to visit [Infura](https://infura.io/) to obtain a project ID. It is free and quick to register.
 
-For importing the wallet credentials, you can use a 12-word seed (USER_MNEMONIC) or a private key (PRIVATE_KEY). Both can be easily exported from wallets such as MetaMask, MyCrypto, etc. 
-
 As well, you can simply just run this script to generate a new wallet: 
 
 ```
 npm run generateSeed
 ```
+
+_You can also use a pre-existing 12-word seed (USER_MNEMONIC) or a private key (PRIVATE_KEY) from MetaMask/MyCrypto, but might be easier just to top up this ad-hoc wallet instead!_
 
 To confirm everything is set up just run: 
 
